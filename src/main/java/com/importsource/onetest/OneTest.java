@@ -85,9 +85,9 @@ public class OneTest {
 
 			Worker worker = null;
 			if (i == threadNum - 1 && remainder != 0) {
-				worker = new Worker("zhang san", loopNum + remainder, latch,function);
+				worker = new Worker("default", loopNum + remainder, latch,function);
 			} else {
-				worker = new Worker("zhang san", loopNum, latch,function);
+				worker = new Worker("default", loopNum, latch,function);
 			}
 			workerPool.execute(worker);
 		}

@@ -5,6 +5,11 @@ import java.util.concurrent.CountDownLatch;
 import com.importsource.onetest.Function;
 import com.importsource.onetest.PerRequest;
 
+/**
+ * 工作线程
+ * @author Hezf
+ *
+ */
 public class Worker extends Thread {
 		String workerName;
 		int loopNum;

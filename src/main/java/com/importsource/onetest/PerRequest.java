@@ -1,9 +1,7 @@
 package com.importsource.onetest;
-/**
- * 
- */
 
 /**
+ * 每次请求的状态记录
  * @author Hezf
  *
  */

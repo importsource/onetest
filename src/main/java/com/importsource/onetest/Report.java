@@ -14,6 +14,7 @@ import com.importsource.onetest.PerRequest;
 import com.importsource.onetest.Result;
 
 /**
+ * 用来保存聚合报告的
  * @author Hezf
  *
  */

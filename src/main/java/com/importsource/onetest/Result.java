@@ -2,6 +2,7 @@ package com.importsource.onetest;
 import java.util.List;
 
 /**
+ * 执行结果。主要是成功和失败
  * @author Hezf
  *
  */

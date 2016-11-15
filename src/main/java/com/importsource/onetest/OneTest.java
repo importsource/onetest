@@ -23,14 +23,54 @@ public class OneTest {
 	private  ExecutorService workerPool;
 	
 	final  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
+	/**
+     *  可以指定线程数的测试
+     * @param label 名称（你可以给自己的本次测试起一个名字）
+     * @param sample 数量（执行次数）
+     * @param num 线程数量
+     * @param function 要执行的函数
+     */
+	public OneTest(String label, int sample, int num,Function function) {
+		this.label=label;
+		this.sample=sample;
+		this.threadNum=num;
+		this.function=function;
+	}
+	
+	/**
+     *  可以指定线程数的测试
+     * @param label 名称（你可以给自己的本次测试起一个名字）
+     * @param sample 数量（执行次数）
+     * @param num 线程数量
+     * @param function 要执行的函数
+     * @param after 整个测试执行完毕后的清理工作
+     */
+	public OneTest(String label, int sample, int num,Function function,After after) {
+		this.label=label;
+		this.sample=sample;
+		this.threadNum=num;
+		this.function=function;
+		this.after=after;
+	}
 
-
+    /**
+     *  可以指定线程数的测试
+     * @param label 名称（你可以给自己的本次测试起一个名字）
+     * @param sample 数量（执行次数）
+     * @param num 线程数量
+     */
 	public OneTest(String label, int sample, int num) {
 		this.label=label;
 		this.sample=sample;
 		this.threadNum=num;
 	}
 
+	/**
+	 * 线程默认为1的测试
+	 * @param label 名称（你可以给自己的本次测试起一个名字）
+	 * @param sample 数量（执行次数）
+	 */
 	public OneTest(String label, int sample) {
 		this.label=label;
 		this.sample=sample;

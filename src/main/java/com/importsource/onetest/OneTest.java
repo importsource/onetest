@@ -135,7 +135,9 @@ public class OneTest {
 			latch.await();
 		} catch (InterruptedException e) {
 		}// 等待所有工人完成工作
-		
+		if(after!=null){
+			after.after(null);
+		}
 		System.out.println("all work done at " + sdf.format(new Date()));
 		System.out.println("Labels:" + label);
 		System.out.println("#Samples:" + sample);

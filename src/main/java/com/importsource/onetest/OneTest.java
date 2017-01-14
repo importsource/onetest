@@ -18,8 +18,12 @@ public class OneTest {
 	private Function function;
 
 	private After after;
-	
-	private static final int WORKER_POOL_SIZE = 200;
+
+    private boolean isDebug;
+
+
+
+    private static final int WORKER_POOL_SIZE = 200;
 	private  ExecutorService workerPool;
 	
 	final  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -129,15 +133,14 @@ public class OneTest {
 			} else {
 				worker = new Worker("default", loopNum, latch,function);
 			}
+            worker.setDebug(isDebug);
 			workerPool.execute(worker);
 		}
 		try {
 			latch.await();
 		} catch (InterruptedException e) {
 		}// 等待所有工人完成工作
-		if(after!=null){
-			after.after(null);
-		}
+
 		System.out.println("all work done at " + sdf.format(new Date()));
 		System.out.println("Labels:" + label);
 		System.out.println("#Samples:" + sample);
@@ -151,8 +154,12 @@ public class OneTest {
 		
 		System.out.println("Error(%):" + Report.errorPercent(sample) + "%");
 		System.out.println("Success(%):" + Report.successPercent(sample) + "%");
-		
-		
+
+		if(after!=null){
+			after.after(null);
+		}
+
+        System.out.println("+-------------------------------------------------+");
 		
 		
 	}
@@ -165,4 +172,29 @@ public class OneTest {
 		return after;
 	}
 
+	public void clear() {
+		Report.clearAll();
+	}
+
+    /**
+     * 是否debug状态
+     * @return
+     */
+    public boolean isDebug() {
+        return isDebug;
+    }
+
+    /**
+     * 设置是否输出debug信息
+     * @param debug
+     * @return
+     */
+    public OneTest setDebug(boolean debug) {
+        isDebug = debug;
+        return this;
+    }
+
+    public void stop() {
+
+    }
 }

@@ -7,64 +7,78 @@ import com.importsource.onetest.PerRequest;
 
 /**
  * 工作线程
- * @author Hezf
  *
+ * @author Hezf
  */
 public class Worker extends Thread {
-		String workerName;
-		int loopNum;
-		CountDownLatch latch;
-		Function function;
+    String workerName;
+    int loopNum;
+    CountDownLatch latch;
+    Function function;
+    boolean isDebug = false;
 
-		public Worker(String workerName, int loopNum, CountDownLatch latch) {
-			this.workerName = workerName;
-			this.loopNum = loopNum;
-			this.latch = latch;
-		}
 
-		public Worker(String workerName, int loopNum, CountDownLatch latch, Function function) {
-			this(workerName, loopNum, latch);
-			this.function=function;
-		}
+    public Worker(String workerName, int loopNum, CountDownLatch latch) {
+        this.workerName = workerName;
+        this.loopNum = loopNum;
+        this.latch = latch;
+    }
 
-		public void run() {
-			try {
-				for (int i = 0; i < loopNum; i++) {
-					doWork();// 工作了
-				}
-			} finally {
-				latch.countDown();// 工人完成工作，计数器减一
-			}
-		}
+    public Worker(String workerName, int loopNum, CountDownLatch latch, Function function) {
+        this(workerName, loopNum, latch);
+        this.function = function;
+    }
 
-		private void doWork() {
-			long start=0;
-			long end=0;
-			boolean isError=false;
-			try {
-				start = System.currentTimeMillis();
-				function.function(latch.getCount());
-				end = System.currentTimeMillis();
-				System.out.println(latch.getCount());
-				isError=false;
-			} catch (RuntimeException e) {
-				end = System.currentTimeMillis();
-				isError=true;
-				Report.result.setErrorNum(Report.result.getErrorNum() + 1);
-			} finally {
-				if (!isError) {
-					Report.result.setSuccessNum(Report.result.getSuccessNum() + 1);
-				}
-				long time = end - start;
+    public void run() {
+        try {
+            for (int i = 0; i < loopNum; i++) {
+                doWork();// 工作了
+            }
+        } finally {
+            latch.countDown();// 工人完成工作，计数器减一
+        }
+    }
 
-				PerRequest perRequest = new PerRequest();
-				perRequest.setTime(time);
+    private void doWork() {
+        //System.out.println(isDebug);
+        long start = 0;
+        long end = 0;
+        boolean isError = false;
+        try {
+            start = System.currentTimeMillis();
+            function.function(latch.getCount());
+            end = System.currentTimeMillis();
+            if (isDebug) {
+                System.out.println(latch.getCount());
+            }
+            isError = false;
+        } catch (RuntimeException e) {
+            end = System.currentTimeMillis();
+            isError = true;
+            Report.result.setErrorNum(Report.result.getErrorNum() + 1);
+        } finally {
+            if (!isError) {
+                Report.result.setSuccessNum(Report.result.getSuccessNum() + 1);
+            }
+            long time = end - start;
 
-				Report.add(perRequest);
-				Report.setMin(time);
-				Report.setMax(time);
-				Report.setTotal(time);
-			}
-		}
+            PerRequest perRequest = new PerRequest();
+            perRequest.setTime(time);
 
-	}
+            Report.add(perRequest);
+            Report.setMin(time);
+            Report.setMax(time);
+            Report.setTotal(time);
+        }
+    }
+
+    public boolean isDebug() {
+        return isDebug;
+    }
+
+    public Worker setDebug(boolean debug) {
+        isDebug = debug;
+        return this;
+    }
+
+}

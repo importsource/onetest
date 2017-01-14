@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.importsource.onetest.PerRequest;
 import com.importsource.onetest.Result;
+import com.sun.corba.se.spi.activation.IIOP_CLEAR_TEXT;
 
 /**
  * 用来保存聚合报告的
@@ -60,6 +61,10 @@ public class Report {
 	public static float tps() {
 		if (tps == 0) {
 			BigDecimal loopNumDecimal = new BigDecimal(list().size());
+			if(total==0){
+				System.out.println("'Total==0' is true,so the Tps is approximate number. REAL Tps is Infinity.");
+				total=1l;
+			}
 			float tps = (loopNumDecimal.floatValue() / total) * 1000;
 			Report.tps = tps;
 		}
@@ -132,6 +137,20 @@ public class Report {
 
 		average = totalDecimal.divide(loopNumDecimal);
 		return average;
+	}
+
+    /**
+     * clear all data
+     */
+	public static void clearAll(){
+	    average=BigDecimal.ZERO;
+		min=0;
+		max=0;
+		total=0;
+        perRequests.clear();
+        tps=0f;
+        result.setErrorNum(0l);
+        result.setSuccessNum(0l);
 	}
 	
 	

@@ -46,10 +46,28 @@ Success(%):100.0%
 
 
 
-## Feature
+## Features
+
+### Debug support.
 
 If you need to see more details,you can use method `setDebug(true)` ,as below:
 
 ```java
-oneTest.setDebug(false);
+oneTest.setDebug(true);
 ```
+[Note]:`isDebug` is false by default.
+
+### Clear Report Data
+
+If you run more test case in one time,you can clear report data in you after function,as below:
+```java
+ After after=new After() {
+            public void after(Object args) {
+                if(oneTest!=null)
+                 oneTest.clear();
+               // Report.clearAll();
+               // oneTest.stop();
+            }
+        };
+```
+

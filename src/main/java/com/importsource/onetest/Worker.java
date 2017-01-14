@@ -32,10 +32,10 @@ public class Worker extends Thread {
     public void run() {
         try {
             for (int i = 0; i < loopNum; i++) {
-                doWork();// 工作了
+                doWork();
             }
         } finally {
-            latch.countDown();// 工人完成工作，计数器减一
+            latch.countDown();
         }
     }
 

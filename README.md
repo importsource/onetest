@@ -1,8 +1,8 @@
 # OneTest
-a simple performance tool.
+A simple performance test tool.
 
 
-##Demo
+## Demo
 
 ```java
 OneTest oneTest=new OneTest("Redis get(1byte)",10000);
@@ -24,7 +24,7 @@ OneTest oneTest=new OneTest("Redis get(1byte)",10000);
 ```
 
 
-##Result
+## Result
 ```log
 Labels:Redis get(1byte)
 #Samples:10000
@@ -42,4 +42,14 @@ Total:4403
 Tps:2271.1787
 Error(%):0.0%
 Success(%):100.0%
+```
+
+
+
+## Feature
+
+If you need to see more details,you can use method `setDebug(true)` ,as below:
+
+```java
+oneTest.setDebug(false);
 ```

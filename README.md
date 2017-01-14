@@ -1,8 +1,8 @@
 # OneTest
-a simple performance tool.
+A simple performance test tool.
 
 
-##Demo
+## Demo
 
 ```java
 OneTest oneTest=new OneTest("Redis get(1byte)",10000);
@@ -24,7 +24,7 @@ OneTest oneTest=new OneTest("Redis get(1byte)",10000);
 ```
 
 
-##Result
+## Result
 ```log
 Labels:Redis get(1byte)
 #Samples:10000
@@ -43,3 +43,31 @@ Tps:2271.1787
 Error(%):0.0%
 Success(%):100.0%
 ```
+
+
+
+## Features
+
+### Debug support.
+
+If you need to see more details,you can use method `setDebug(true)` ,as below:
+
+```java
+oneTest.setDebug(true);
+```
+[Note]:`isDebug` is false by default.
+
+### Clear Report Data
+
+If you run more test cases in one time,you can clear report data in your `after` function,as below:
+```java
+ After after=new After() {
+            public void after(Object args) {
+                if(oneTest!=null)
+                 oneTest.clear();
+               // Report.clearAll();
+               // oneTest.stop();
+            }
+        };
+```
+

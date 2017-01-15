@@ -65,7 +65,7 @@ oneTest.setDebug(true);
 
 ### Clear Report Data
 
-If you run more test cases in one time,you can clear report data in your `after` function,as below:
+If you need to run more test cases in one time,you can clear report data in your `after` function,as below:
 ```java
  After after=new After() {
             public void after(Object args) {

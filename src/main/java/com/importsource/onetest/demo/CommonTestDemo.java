@@ -21,16 +21,16 @@ public class CommonTestDemo {
         final OneTest oneTest=new OneTest("Redis set(1byte)",10);
         Function function=new Function() {
             public void function(Object args) {
-                throw new RuntimeException("sdf");
+               // throw new RuntimeException("sdf");
                 // System.out.println(args);
             }
         };
         After after=new After() {
             public void after(Object args) {
-                if(oneTest!=null)
-                 oneTest.clear();
+                if(oneTest!=null){
+                 oneTest.clear();}
                // Report.clearAll();
-               // oneTest.stop();
+                oneTest.stop();
             }
         };
 

@@ -1,5 +1,7 @@
 package com.importsource.onetest;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.CountDownLatch;
 
 import com.importsource.onetest.Function;
@@ -16,6 +18,8 @@ public class Worker extends Thread {
     CountDownLatch latch;
     Function function;
     boolean isDebug = false;
+
+    final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 
     public Worker(String workerName, int loopNum, CountDownLatch latch) {
@@ -69,6 +73,7 @@ public class Worker extends Thread {
             Report.setMin(time);
             Report.setMax(time);
             Report.setTotal(time);
+
         }
     }
 

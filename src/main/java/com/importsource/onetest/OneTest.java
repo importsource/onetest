@@ -160,6 +160,7 @@ public class OneTest {
 		}
 
         System.out.println("+-------------------------------------------------+");
+        this.stop();
 		
 		
 	}
@@ -195,6 +196,8 @@ public class OneTest {
     }
 
     public void stop() {
-
+        if(!workerPool.isShutdown()) {
+            workerPool.shutdownNow();
+        }
     }
 }

@@ -83,4 +83,4 @@ If you hope stop all running thread after test complete,you can do it as below:
 ```java
 oneTest.stop();
 ```
-Autimately stop by default in OneTest.
+Automately stop by default in OneTest.

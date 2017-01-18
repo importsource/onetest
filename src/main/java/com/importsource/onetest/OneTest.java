@@ -120,6 +120,7 @@ public class OneTest {
 	}
 
 	public void start() {
+	    printLogo();
 		int remainder = sample % (threadNum);
 		int loopNum = (sample - remainder) / threadNum;
 		// System.out.println(getLoopNum(threadNum, sample));
@@ -165,7 +166,13 @@ public class OneTest {
 		
 	}
 
-	public Function getFunction() {
+    private void printLogo() {
+        System.out.println("╔═╗┌┐┌┌─┐╔╦╗┌─┐┌─┐┌┬┐\n" +
+                "║ ║│││├┤  ║ ├┤ └─┐ │ \n" +
+                "╚═╝┘└┘└─┘ ╩ └─┘└─┘ ┴ ");
+    }
+
+    public Function getFunction() {
 		return function;
 	}
 

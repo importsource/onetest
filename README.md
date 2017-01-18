@@ -77,3 +77,10 @@ If you need to run more test cases in one time,you can clear report data in your
         };
 ```
 
+### Stop all running thread
+
+If you hope stop all running thread after test complete,you can do it as below:
+```java
+oneTest.stop();
+```
+Automately stop by default in OneTest.

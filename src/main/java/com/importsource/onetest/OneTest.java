@@ -150,12 +150,14 @@ public class OneTest {
 		System.out.println("all work done at " + sdf.format(new Date()));
 		System.out.println("Labels:" + label);
 		System.out.println("#Samples:" + sample);
-		System.out.println("Average:" + conTotal/sample);
+		System.out.println("Average:" + Report.average(sample));
+        System.out.println("C-Average:" + conTotal/sample);
 		Report.sort();
 		System.out.println("Min:" + Report.min());
 		System.out.println("Max:" + Report.max());
 
 		System.out.println("Total:" + Report.total());
+        System.out.println("Con-Total:" + conTotal);
 		System.out.println("Tps:" + sample*1000/conTotal);
 		
 		System.out.println("Error(%):" + Report.errorPercent(sample) + "%");

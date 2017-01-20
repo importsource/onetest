@@ -21,6 +21,9 @@ public class OneTest {
 
     private boolean isDebug;
 
+    long start;
+    long end;
+
 
 
     private static final int WORKER_POOL_SIZE = 200;
@@ -120,6 +123,7 @@ public class OneTest {
 	}
 
 	public void start() {
+        start = System.currentTimeMillis();
 	    printLogo();
 		int remainder = sample % (threadNum);
 		int loopNum = (sample - remainder) / threadNum;
@@ -141,17 +145,18 @@ public class OneTest {
 			latch.await();
 		} catch (InterruptedException e) {
 		}// 等待所有工人完成工作
-
+        end = System.currentTimeMillis();
+        long conTotal=end-start;
 		System.out.println("all work done at " + sdf.format(new Date()));
 		System.out.println("Labels:" + label);
 		System.out.println("#Samples:" + sample);
-		System.out.println("Average:" + Report.average(sample));
+		System.out.println("Average:" + conTotal/sample);
 		Report.sort();
 		System.out.println("Min:" + Report.min());
 		System.out.println("Max:" + Report.max());
 
 		System.out.println("Total:" + Report.total());
-		System.out.println("Tps:" + Report.tps());
+		System.out.println("Tps:" + sample*1000/conTotal);
 		
 		System.out.println("Error(%):" + Report.errorPercent(sample) + "%");
 		System.out.println("Success(%):" + Report.successPercent(sample) + "%");
